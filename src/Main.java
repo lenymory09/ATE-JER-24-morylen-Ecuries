@@ -14,7 +14,7 @@ public class Main {
 
         for (Personne employe : ecurie.getListeEmployes()){
             if (employe instanceof Ingenieur){
-                ((Ingenieur) employe).conceptionnerVehicule("ferariri");
+                ((Ingenieur) employe).conceptionnerVehicule("ferari");
             } else if (employe instanceof Pilote){
                 ((Pilote) employe).conduire(ecurie.getListeVehicules().get(1));
             } else {
@@ -25,4 +25,6 @@ public class Main {
         // Affichage des membres et véhicules de l'écurie
         System.out.println(ecurie);
     }
+
+    public void afficherChoix();
 }

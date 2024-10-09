@@ -82,13 +82,13 @@ public class Ecurie {
         description.append(nom).append(" : \n");
         description.append("Employees : \n");
 
-        for (Personne employe : listeEmployes) {
-            description.append(employe.toString()).append("\n");
+        for (int index = 0; index < listeEmployes.size(); index++) {
+            description.append("[ Employe " + index + " ] ").append(listeEmployes.get(index).toString()).append("\n");
         }
 
         description.append("Véhicules : \n");
-        for (Vehicule vehicule : listeVehicules) {
-            description.append(vehicule.toString()).append("\n");
+        for (int index = 0; index < listeVehicules.size(); index++) {
+            description.append("[ Véhicule " + index + " ] ").append(listeVehicules.get(index).toString()).append("\n");
         }
 
         return description.toString();

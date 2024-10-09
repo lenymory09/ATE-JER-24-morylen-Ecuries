@@ -65,6 +65,6 @@ public abstract class Personne {
     }
 
     public String toString(){
-        return getPrenom() + " " + getNom() + ", Salaire : CHF" + getSalaire() + ". ";
+        return getPrenom() + " " + getNom() + ", Salaire : CHF " + getSalaire() + ". ";
     }
 }
