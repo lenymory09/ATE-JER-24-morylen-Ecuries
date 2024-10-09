@@ -18,9 +18,9 @@ public class Voiture extends Vehicule{
 
     /**
      * retourne une description de la voiture
-     * @return la chaine de caractere
+     * @return la chaine de caractère
      */
     public String toString() {
-        return this.getClass() + " : " + super.toString();
+        return this.getClass().getName() + ", " + super.toString();
     }
 }

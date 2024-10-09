@@ -1,4 +1,4 @@
-public class ResponsableTechnique extends Personne{
+public class ResponsableTechnique extends Personne {
 
     /**
      * construit un responsable technique avec son nom, prenom et salaire
@@ -23,7 +23,7 @@ public class ResponsableTechnique extends Personne{
      * @param vehiculeAReparer   véhicule à réparer
      */
     public void reparerVehicule(Vehicule vehiculeAReparer){
-        System.out.println("Le véhicule : " + vehiculeAReparer + " a ete réparé.");
+        System.out.println("Le véhicule : " + vehiculeAReparer.toString() + " a ete réparé.");
     }
 
     /**

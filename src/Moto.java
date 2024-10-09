@@ -22,6 +22,6 @@ public class Moto extends Vehicule{
      * @return la chaine de caractere
      */
     public String toString() {
-        return this.getClass() + " : " + super.toString();
+        return this.getClass().getName() + ", " + super.toString();
     }
 }

@@ -1,4 +1,4 @@
-public class Personne {
+public abstract class Personne {
     private String nom;
     private String prenom;
     private float salaire;
@@ -65,6 +65,6 @@ public class Personne {
     }
 
     public String toString(){
-        return "Je m'appelle "+ getPrenom() + " " + getNom() + ". J'ai un salaire de CHF" + getSalaire() + ". ";
+        return getPrenom() + " " + getNom() + ", Salaire : CHF" + getSalaire() + ". ";
     }
 }
