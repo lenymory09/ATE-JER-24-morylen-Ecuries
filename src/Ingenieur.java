@@ -21,6 +21,6 @@ public class Ingenieur extends Personne{
      * @return une description textuel de l'ingénieur
      */
     public String toString() {
-        return super.toString() + "Je suis un ingénieur.";
+        return super.toString() + "Ingénieur.";
     }
 }

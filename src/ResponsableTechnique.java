@@ -30,7 +30,7 @@ public class ResponsableTechnique extends Personne {
      * @return une description textuel du responsable technique
      */
     public String toString() {
-        return super.toString() + "Je suis un responsable technique.";
+        return super.toString() + "Responsable technique.";
     }
 
 }

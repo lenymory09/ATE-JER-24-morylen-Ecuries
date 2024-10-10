@@ -75,22 +75,39 @@ public class Ecurie {
         return listeVehicules;
     }
 
+    public void afficherListeVehicule(){
+        for (int index = 0; index < listeVehicules.size(); index++){
+            System.out.println("Vehicule " + (index + 1) + " " + listeVehicules.get(index));
+        }
+    }
+
+    public void afficherListeEmploye(){
+        for (int index = 0; index < listeEmployes.size(); index++){
+            System.out.println("Employe " + (index + 1) + " " + listeEmployes.get(index));
+        }
+    }
+
+    /**
+     * ajoute l'employe passé en parametre à la liste d'employes
+     * @param employe à ajouter dans la liste
+     */
+    public void ajouterEmploye(Personne employe) {
+        listeEmployes.add(employe);
+    }
+
+    public void vendrePlusieursVehicules(String strVehiculesASupprimer){
+        String[] vehiculesASupprimer = strVehiculesASupprimer.split(" ");
+
+        for (String vehicule : vehiculesASupprimer){
+            vendreVehicule(Integer.parseInt(vehicule) - 1);
+        }
+    }
+
+    /**
+     * @return le nom de l'écurie
+     */
     @Override
     public String toString() {
-        StringBuilder description = new StringBuilder();
-
-        description.append(nom).append(" : \n");
-        description.append("Employees : \n");
-
-        for (int index = 0; index < listeEmployes.size(); index++) {
-            description.append("[ Employe " + index + " ] ").append(listeEmployes.get(index).toString()).append("\n");
-        }
-
-        description.append("Véhicules : \n");
-        for (int index = 0; index < listeVehicules.size(); index++) {
-            description.append("[ Véhicule " + index + " ] ").append(listeVehicules.get(index).toString()).append("\n");
-        }
-
-        return description.toString();
+        return nom;
     }
 }
