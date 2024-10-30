@@ -7,6 +7,9 @@ public class Main {
     public final static int CHOIX_SUPPRIMER_EMPLOYES = 4;
     public final static int CHOIX_AJOUTER_VEHICULES = 5;
     public final static int CHOIX_SUPPRIMER_VEHICULES = 6;
+    public final static int CHOIX_VOIR_COURSES = 7;
+    public final static int CHOIX_FAIRE_CONDUIRE_PILOTE = 8;
+    public final static int CHOIX_ARRETER_PROGRAMME = 0;
 
     public static void main(String[] args) {
 
@@ -15,7 +18,7 @@ public class Main {
         // ajout de véhicule
         ecurie.ajouterVehicule(new Voiture("Ferrari", 1999));
         ecurie.ajouterVehicule(new Voiture("Lamborgini", 2020));
-        ecurie.ajouterVehicule(new Moto("GT 9/11", 2001));
+        ecurie.ajouterVehicule(new Moto("GT 2/12", 2009));
 
         // ajout de personnel
         ecurie.employerPersonnel(new Ingenieur("DZ", "Algerino", 19999));
@@ -33,13 +36,14 @@ public class Main {
     }
 
     public static void afficherChoix() {
-        System.out.println("[1] Afficher les employés.\n" +
-                "[2] Voir les véhicules\n" +
-                "[3] Ajouter des employés\n" +
-                "[4] Supprimer des employés\n" +
-                "[5] Ajouter des véhicules\n" +
-                "[6] supprimer des véhicules\n" +
-                "[7] arreter le programme");
+        System.out.println("""
+                [1] Afficher les employés.
+                [2] Voir les véhicules
+                [3] Ajouter des employés
+                [4] Supprimer des employés
+                [5] Ajouter des véhicules
+                [6] supprimer des véhicules
+                [7] arreter le programme""");
     }
 
     public static void traiterChoix(int choix, Ecurie ecurie) {
@@ -48,7 +52,7 @@ public class Main {
                 ecurie.afficherListeEmploye();
                 break;
             case CHOIX_AFFICHER_VEHICULES:
-                ecurie.afficherListeVehicule();
+                ecurie.afficherVehicules();
                 break;
             case CHOIX_AJOUTER_EMPLOYE:
                 switch (saisirEntier("Ingenieur [1], Responsable technique [2] ou Pilote [3] ? ")) {
@@ -68,35 +72,49 @@ public class Main {
                                 break;
                         }
                         break;
-                    case CHOIX_SUPPRIMER_EMPLOYES:
-                        ecurie.afficherListeEmploye();
-                        ecurie.vendrePlusieursVehicules(saisirChaine("Saisir les véhicules à vendre : "));
+                }
+                break;
+            case CHOIX_SUPPRIMER_EMPLOYES:
+                ecurie.afficherListeEmploye();
+                ecurie.licencierPersonnel(saisirChaine("Saisir les employées à licencier : "));
+                break;
+            case CHOIX_AJOUTER_VEHICULES:
+                System.out.println("Moto [1] ou Voiture [2] ?");
+                switch (saisirEntier("Moto [1] ou Voiture [2] ? ")) {
+                    case 1:
+                        ecurie.ajouterVehicule(new Moto(saisirChaine("Modele : "), saisirEntier("Annee de conception : ")));
                         break;
-                    case CHOIX_AJOUTER_VEHICULES:
-                        System.out.println("Moto [1] ou Voiture [2] ?");
-                        switch (saisirEntier("Moto [1] ou Voiture [2] ? ")) {
-                            case 1:
-                                ecurie.ajouterVehicule(new Moto(saisirChaine("Modele : "), saisirEntier("Annee de conception : ")));
-                                break;
-                            case 2:
-                                ecurie.ajouterVehicule(new Voiture(saisirChaine("Modele : "), saisirEntier("Annee de conception : ")));
-                                break;
-                        }
+                    case 2:
+                        ecurie.ajouterVehicule(new Voiture(saisirChaine("Modele : "), saisirEntier("Annee de conception : ")));
+                        break;
                 }
                 break;
             case CHOIX_SUPPRIMER_VEHICULES:
-                ecurie.afficherListeVehicule();
+                ecurie.afficherVehicules();
                 ecurie.vendrePlusieursVehicules(saisirChaine("Quels véhicules voulez-vous vendre ? "));
                 break;
         }
     }
 
+
+    /**
+     * permet de saisir une chaine
+     *
+     * @param prompt à afficher pour l'utilisateur
+     * @return la chaine saisie par l'utilisateur
+     */
     public static String saisirChaine(String prompt) {
         System.out.print(prompt);
         Scanner scanner = new Scanner(System.in);
         return scanner.nextLine();
     }
 
+    /**
+     * permet de saisir un nombre
+     *
+     * @param prompt à afficher pour l'utilisateur
+     * @return le nombre saisi par l'utilisateur
+     */
     public static int saisirEntier(String prompt) {
         System.out.print(prompt);
         Scanner scanner = new Scanner(System.in);

@@ -26,7 +26,11 @@ public class Pilote extends Personne{
         return super.toString() + "pilote.";
     }
 
-    public void conduire(Vehicule vehicule){
+    /**
+     *
+     * @param vehicule
+     */
+    public void conduire(Vehicule vehicule, Course course){
         if (typeVehicule == TypeVehicule.MOTO) {
             if (vehicule instanceof Moto)
                 System.out.println(this + "conduit " + ((Moto)vehicule));

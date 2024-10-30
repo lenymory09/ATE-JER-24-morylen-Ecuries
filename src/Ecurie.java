@@ -1,8 +1,8 @@
 import java.util.ArrayList;
 
-public class Ecurie {
-    private final ArrayList<Personne> listeEmployes = new ArrayList<>();
-    private final ArrayList<Vehicule> listeVehicules = new ArrayList<>();
+public class Ecurie{
+    private final ArrayList<Personne> Employes = new ArrayList<>();
+    private final ArrayList<Vehicule> Vehicules = new ArrayList<>();
     String nom = "Ecurie";
 
     /**
@@ -24,7 +24,7 @@ public class Ecurie {
      * @param nouveauVehicule de la liste
      */
     public void ajouterVehicule(Vehicule nouveauVehicule) {
-        listeVehicules.add(nouveauVehicule);
+        Vehicules.add(nouveauVehicule);
     }
 
     /**
@@ -33,7 +33,7 @@ public class Ecurie {
      * @param vehiculeAVendre véhicule a retirer de la liste
      */
     public void vendreVehicule(Vehicule vehiculeAVendre) {
-        listeVehicules.removeIf(vehicule -> vehicule == vehiculeAVendre);
+        Vehicules.remove(vehiculeAVendre);
     }
 
     /**
@@ -42,7 +42,7 @@ public class Ecurie {
      * @param indexVehicule du véhicule
      */
     public void vendreVehicule(int indexVehicule) {
-        listeVehicules.remove(indexVehicule);
+        Vehicules.remove(indexVehicule);
     }
 
     /**
@@ -51,39 +51,50 @@ public class Ecurie {
      * @param nouvelEmploye de l'écurie
      */
     public void employerPersonnel(Personne nouvelEmploye) {
-        listeEmployes.add(nouvelEmploye);
+        Employes.add(nouvelEmploye);
     }
 
     /**
-     * retire un employé d'une liste d'employé
-     *
-     * @param employe employé a retirer de la liste
+     * retire du personnel passé en parametre
+     * @param personnelALicencier personnel à licencier
      */
-    public void virerPersonnel(Personne employe) {
-        listeEmployes.remove(employe);
-    }
-
-    public void virerPersonnel(int indexEmploye) {
-        listeEmployes.remove(indexEmploye);
-    }
-
-    public ArrayList<Personne> getListeEmployes() {
-        return listeEmployes;
-    }
-
-    public ArrayList<Vehicule> getListeVehicules() {
-        return listeVehicules;
-    }
-
-    public void afficherListeVehicule(){
-        for (int index = 0; index < listeVehicules.size(); index++){
-            System.out.println("Vehicule " + (index + 1) + " " + listeVehicules.get(index));
+    public void licencierPersonnel(String personnelALicencier){
+        int decallageIndex = 1;
+        for (String employeQuiPart : personnelALicencier.split(" ")){
+            Employes.remove(Integer.parseInt(employeQuiPart) - decallageIndex);
+            decallageIndex++;
         }
     }
 
-    public void afficherListeEmploye(){
-        for (int index = 0; index < listeEmployes.size(); index++){
-            System.out.println("Employe " + (index + 1) + " " + listeEmployes.get(index));
+    /**
+     * @return la liste des employés
+     */
+    public ArrayList<Personne> getEmployes() {
+        return Employes;
+    }
+
+    /**
+     * @return les véhicules de l'écurie
+     */
+    public ArrayList<Vehicule> getVehicules() {
+        return Vehicules;
+    }
+
+    /**
+     * affiche les véhicules de l'écurie
+     */
+    public void afficherVehicules(){
+        for (int index = 0; index < Vehicules.size(); index++){
+            System.out.println("Vehicule " + (index + 1) + " " + Vehicules.get(index));
+        }
+    }
+
+    /**
+     * affiche les employés de l'écurie
+     */
+    public void afficherEmployes(){
+        for (int index = 0; index < Employes.size(); index++){
+            System.out.println("Employe " + (index + 1) + " " + Employes.get(index));
         }
     }
 
@@ -92,9 +103,13 @@ public class Ecurie {
      * @param employe à ajouter dans la liste
      */
     public void ajouterEmploye(Personne employe) {
-        listeEmployes.add(employe);
+        Employes.add(employe);
     }
 
+    /**
+     * Retire les véhicules passés en parametre de l'écurie
+     * @param strVehiculesASupprimer véhicules à vendre
+     */
     public void vendrePlusieursVehicules(String strVehiculesASupprimer){
         String[] vehiculesASupprimer = strVehiculesASupprimer.split(" ");
 

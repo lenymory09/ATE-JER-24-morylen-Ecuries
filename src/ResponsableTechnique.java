@@ -32,5 +32,4 @@ public class ResponsableTechnique extends Personne {
     public String toString() {
         return super.toString() + "Responsable technique.";
     }
-
 }
