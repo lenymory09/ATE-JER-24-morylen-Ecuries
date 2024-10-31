@@ -3,6 +3,7 @@ import java.time.LocalDate;
 public class Vehicule {
     private String modele;
     private int anneeDeCreation = LocalDate.now().getYear();
+    boolean estUtilise = false;
 
     /**
      * construit un véhicule avec son modele et sa date de création
@@ -46,12 +47,27 @@ public class Vehicule {
         return anneeDeCreation;
     }
 
+    /**
+     * initialise l'année de création passé en parametre au véhicule
+     * @param anneeDeCreation de la voiture
+     */
     public void setAnneeDeCreation(int anneeDeCreation) {
         int anneeActuelle = LocalDate.now().getYear();
         if (anneeDeCreation > 1850 && anneeDeCreation <= anneeActuelle)
             this.anneeDeCreation = anneeDeCreation;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Vehicule vehicule = (Vehicule) o;
+        return anneeDeCreation == vehicule.anneeDeCreation && modele.equals(vehicule.modele);
+    }
+
+    /**
+     * @return une description textuelle du véhicule
+     */
     public String toString(){
         return "Modele : " + getModele() + ", Annee de création : " + getAnneeDeCreation();
     }

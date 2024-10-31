@@ -1,3 +1,5 @@
+import java.util.Objects;
+
 public abstract class Personne {
     private String nom;
     private String prenom;
@@ -64,7 +66,18 @@ public abstract class Personne {
             this.salaire = salaire;
     }
 
+    /**
+     * @return une description textuelle de la personne
+     */
     public String toString(){
         return getPrenom() + " " + getNom() + ", Salaire : CHF " + getSalaire() + ". ";
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Personne personne = (Personne) o;
+        return salaire == personne.salaire && nom.equals(personne.nom) && prenom.equals(personne.prenom);
     }
 }

@@ -7,8 +7,9 @@ public class Main {
     public final static int CHOIX_SUPPRIMER_EMPLOYES = 4;
     public final static int CHOIX_AJOUTER_VEHICULES = 5;
     public final static int CHOIX_SUPPRIMER_VEHICULES = 6;
-    public final static int CHOIX_VOIR_COURSES = 7;
-    public final static int CHOIX_FAIRE_CONDUIRE_PILOTE = 8;
+    public final static int CHOIX_AFFICHER_COURSES = 7;
+    public final static int CHOIX_AFFICHER_DETAILS_COURSE = 8;
+    public final static int CHOIX_AJOUTER_EMPLOYE_COURSE = 9;
     public final static int CHOIX_ARRETER_PROGRAMME = 0;
 
     public static void main(String[] args) {
@@ -25,6 +26,12 @@ public class Main {
         ecurie.employerPersonnel(new Pilote("Fedele", "Luca", 19999, Pilote.TypeVehicule.MOTO));
         ecurie.employerPersonnel(new ResponsableTechnique("Mory", "Leny", 19999));
 
+        // Ajout de courses
+        ecurie.ajouterCourses(new Course("GP explorer", "Budapest"));
+        ecurie.ajouterCourses(new Course("moto GP", "New York"));
+        ecurie.ajouterCourses(new Course("GP explorer", "Budapest"));
+        ecurie.ajouterCourses(new Course("GP explorer", "Budapest"));
+
         // Affichage des membres et véhicules de l'écurie
         System.out.println(ecurie + " : ");
 
@@ -35,21 +42,28 @@ public class Main {
         }
     }
 
+    /**
+     * affiche les choix d'action disponible pour l'utilisateur
+     */
     public static void afficherChoix() {
         System.out.println("""
-                [1] Afficher les employés.
-                [2] Voir les véhicules
-                [3] Ajouter des employés
-                [4] Supprimer des employés
-                [5] Ajouter des véhicules
-                [6] supprimer des véhicules
-                [7] arreter le programme""");
+                
+                [1]  Afficher les employés.
+                [2]  Afficher les véhicules
+                [3]  Ajouter des employés
+                [4]  Supprimer des employés
+                [5]  Ajouter des véhicules
+                [6]  Supprimer des véhicules
+                [7]  Afficher les courses
+                [8]  Afficher les détails d'une course
+                [9]  Ajouter un employé à une course
+                [10] arreter le programme""");
     }
 
     public static void traiterChoix(int choix, Ecurie ecurie) {
         switch (choix) {
             case CHOIX_AFFICHER_EMPLOYES:
-                ecurie.afficherListeEmploye();
+                ecurie.afficherEmployes();
                 break;
             case CHOIX_AFFICHER_VEHICULES:
                 ecurie.afficherVehicules();
@@ -75,11 +89,10 @@ public class Main {
                 }
                 break;
             case CHOIX_SUPPRIMER_EMPLOYES:
-                ecurie.afficherListeEmploye();
+                ecurie.afficherEmployes();
                 ecurie.licencierPersonnel(saisirChaine("Saisir les employées à licencier : "));
                 break;
             case CHOIX_AJOUTER_VEHICULES:
-                System.out.println("Moto [1] ou Voiture [2] ?");
                 switch (saisirEntier("Moto [1] ou Voiture [2] ? ")) {
                     case 1:
                         ecurie.ajouterVehicule(new Moto(saisirChaine("Modele : "), saisirEntier("Annee de conception : ")));
@@ -92,6 +105,31 @@ public class Main {
             case CHOIX_SUPPRIMER_VEHICULES:
                 ecurie.afficherVehicules();
                 ecurie.vendrePlusieursVehicules(saisirChaine("Quels véhicules voulez-vous vendre ? "));
+                break;
+
+            case CHOIX_AFFICHER_COURSES:
+                ecurie.afficherCourses();
+                break;
+            case CHOIX_AFFICHER_DETAILS_COURSE:
+                ecurie.afficherCourses();
+                ecurie.afficherDetailsCourse(saisirEntier("Quelle course voulez-vous voir en détail ? ") - 1);
+                saisirChaine("Appuyez sur entrée pour continuer : ");
+                break;
+            case CHOIX_AJOUTER_EMPLOYE_COURSE:
+                // choisir la course dans lequel ajouter un employé
+                ecurie.afficherCourses();
+                int indexCourse = saisirEntier("Dans quelle course voulez-vous ajouter un employé ? ") - 1;
+
+                // choisir l'employé qui doit etre ajouter dans une course
+                ecurie.afficherEmployes();
+                Personne employeChoisi = ecurie.getEmployes().get(saisirEntier("Quel employé rejoint la course ? ") - 1);
+                if (employeChoisi instanceof Pilote){
+                    ecurie.ajouterPiloteAUneCourse(indexCourse, (Pilote)employeChoisi);
+                } else if (employeChoisi instanceof ResponsableTechnique){
+                    ecurie.ajouterResponsableTechniqueAUneCourse(indexCourse, (ResponsableTechnique) employeChoisi);
+                } else {
+                    System.out.println("L'employé doit être un responsable technique ou un pilote pour etre ajouter à une course.");
+                }
                 break;
         }
     }

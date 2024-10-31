@@ -26,6 +26,8 @@ public class ResponsableTechnique extends Personne {
         System.out.println("Le véhicule : " + vehiculeAReparer.toString() + " a ete réparé.");
     }
 
+
+
     /**
      * @return une description textuel du responsable technique
      */
